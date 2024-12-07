@@ -1,10 +1,12 @@
 import React, { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
+import { TodoContext } from "../contexts/TodoContext";
 
 const Header = () => {
   const nav = useNavigate();
   const { state, dispatch } = useContext(UserContext);
+  const todoDispatch = useContext(TodoContext).dispatch;
   useEffect(() => {
     const localUser = localStorage.getItem("user") || {};
     dispatch({ type: "SET_USER", payload: localUser });
@@ -16,7 +18,8 @@ const Header = () => {
       type: "DELETE_USER",
       payload: {}
     });
-    nav("/login");
+    todoDispatch({ type: "SET_TODOS", payload: [] });
+    nav("/");
   }
   return (
     <header className="border-b">

@@ -23,8 +23,8 @@ const RegisterLayout = () => {
       delete data.confirmPassword;
       const res = await authService.auth("/register", data);
       if (res.status !== 201) throw new Error("Error");
-      localStorage.setItem("accessToken", res.data.accessToken);
-      localStorage.setItem("user", JSON.stringify(res.data.user));
+      // localStorage.setItem("accessToken", res.data.accessToken);
+      // localStorage.setItem("user", JSON.stringify(res.data.user));
       // dispatch({
       //   type: "SET_TODO",
       //   payload: res.data.user

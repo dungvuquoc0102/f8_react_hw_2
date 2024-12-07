@@ -24,15 +24,28 @@ const TodoPage = () => {
           <div className="flex justify-center mt-5">
             <h1 className="text-2xl">Todo List</h1>
           </div>
-          {/* add todo btn */}
-          <div>
-            <Link
-              to="/add"
-              className="p-2 px-4 bg-blue-500 text-white hover:bg-blue-600 rounded-md"
-            >
-              Add todo
-            </Link>
+          {/* todo app function */}
+          <div className="flex justify-between items-center mt-5">
+            {/* add todo btn */}
+            <div>
+              <Link
+                to="/add"
+                className="p-2 px-4 bg-blue-500 text-white hover:bg-blue-600 rounded-md"
+              >
+                Add todo
+              </Link>
+            </div>
+            {/* number of doing todos */}
+            <div>
+              <span className="p-2">
+                Number of doing todos:{" "}
+                <span className="font-bold">
+                  {state.todos.filter((item) => item.status === "doing").length}
+                </span>
+              </span>
+            </div>
           </div>
+
           {/* todo app list */}
           <div className="mt-5 border rounded-md">
             <table className="w-full text-center">
