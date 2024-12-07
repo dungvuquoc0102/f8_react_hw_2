@@ -60,7 +60,6 @@ const TodoPage = () => {
                 </tr>
               </thead>
               <tbody className="divide-y">
-                {console.log(state)}
                 {state.todos.length === 0 ? (
                   <tr>
                     <td className="text-center p-2" colSpan="6">

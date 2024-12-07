@@ -36,7 +36,6 @@ const Header = () => {
           </div>
           {/* Function */}
           <div className="flex gap-3 items-center">
-            {console.log(state)}
             {state?.user?.id ||
             (typeof state?.user === "string" && JSON.parse(state?.user).id) ? (
               <div className="flex gap-3 items-center">

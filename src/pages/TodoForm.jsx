@@ -18,6 +18,7 @@ const TodoForm = () => {
     resolver: zodResolver(todoSchema)
   });
   const { dispatch } = useContext(TodoContext);
+  const todoState = useContext(TodoContext).state;
   const { state } = useContext(UserContext);
   const nav = useNavigate();
   useEffect(() => {
@@ -36,7 +37,10 @@ const TodoForm = () => {
       })();
   }, []);
   async function handleForm(data) {
+    console.log("hello form");
     if (id) {
+      console.log("hello id");
+
       try {
         const res = await todoService.updateById(id, data);
         if (res.status !== 200) throw new Error("Error");
@@ -49,6 +53,13 @@ const TodoForm = () => {
       }
     } else {
       try {
+        if (
+          todoState.todos.filter((todo) => todo.title === data.title).length > 0
+        ) {
+          alert("Todo already exists");
+          return;
+        }
+        console.log("hello");
         const res = await todoService.create(data);
         if (res.status !== 201) throw new Error("Error");
         dispatch({ type: "ADD_TODO", payload: res.data });
@@ -153,7 +164,6 @@ const TodoForm = () => {
                 hidden
               />
             </div>
-            {console.log(typeof state.user === "string")}
             {/* Submit button */}
             <div className="mt-3">
               <button className="p-2 px-4 bg-blue-500 text-white hover:bg-blue-600 rounded-md w-full">

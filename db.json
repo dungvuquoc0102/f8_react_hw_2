@@ -7,6 +7,30 @@
       "priority": "low",
       "userId": 1,
       "id": 1
+    },
+    {
+      "title": "dung1 task 2",
+      "description": "dung1 desc 2",
+      "status": "done",
+      "priority": "high",
+      "userId": 1,
+      "id": 2
+    },
+    {
+      "title": "dung2 task 1",
+      "description": "dung2 desc 1",
+      "status": "doing",
+      "priority": "low",
+      "userId": 2,
+      "id": 3
+    },
+    {
+      "title": "1",
+      "description": "1",
+      "status": "doing",
+      "priority": "low",
+      "userId": 2,
+      "id": 4
     }
   ],
   "users": [
@@ -15,6 +39,12 @@
       "password": "$2a$10$u6u6PYvLRc8ajQTXFJkmV.m507RkkD56OOLdJmAbXGA7vlKNsH3b2",
       "username": "dung1",
       "id": 1
+    },
+    {
+      "email": "dung2@gmail.com",
+      "password": "$2a$10$gYSgmDvZb5UZCAOawy6I3.W/a8h.p3TbVlTtqH4n0WGZy6Au.Lff.",
+      "username": "dung2",
+      "id": 2
     }
   ]
 }
