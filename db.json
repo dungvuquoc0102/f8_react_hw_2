@@ -1,4 +1,57 @@
 {
-	"todos": [],
-	"users": []
+  "todos": [
+    {
+      "title": "a",
+      "description": "a",
+      "status": "doing",
+      "priority": "low",
+      "userId": 1,
+      "id": 1
+    },
+    {
+      "title": "a",
+      "description": "a",
+      "status": "doing",
+      "priority": "low",
+      "userId": 5,
+      "id": 2
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "email": "dung@gmail.com",
+      "password": "dung"
+    },
+    {
+      "id": 2,
+      "email": "dung2@gmail.com",
+      "password": "dung2"
+    },
+    {
+      "email": "dung3@gmail.com",
+      "password": "$2a$10$J45G3ElbVB1PTREiTnB.m.PeadqGQiRN67CADBmvDq1TBop972RN6",
+      "username": "1",
+      "confirmPassword": "123456",
+      "id": 3
+    },
+    {
+      "email": "dung4@gmail.com",
+      "password": "$2a$10$prXgicl2No0DLiX1NsXkguT6fg6S3P1MWewvoENfonVjJjj/Qubya",
+      "username": "1",
+      "id": 4
+    },
+    {
+      "email": "dung5@gmail.com",
+      "password": "$2a$10$9JqDXLyr2PdL0apQUbxrduoUQTNInmxALDCXH.4OBZx10hQdlcIHK",
+      "username": "1",
+      "id": 5
+    },
+    {
+      "email": "dung6@gmail.com",
+      "password": "$2a$10$HIlVrvkikLfhmmUAEK9/M.qEEgknjcKxt30GO/P4CvsxnHSaPWZ/i",
+      "username": "1",
+      "id": 6
+    }
+  ]
 }
