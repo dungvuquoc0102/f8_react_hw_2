@@ -9,8 +9,9 @@ export const UserProvider = () => {
     user: {}
   });
   useEffect(() => {
-    const localUser = localStorage.getItem("user") || {};
-    dispatch({ type: "SET_USER", payload: localUser });
+    const user = JSON.parse(localStorage.getItem("user")) || {};
+    if (!user) return;
+    dispatch({ type: "SET_USER", payload: user });
   }, []);
   return (
     <UserContext.Provider value={{ state, dispatch }}>

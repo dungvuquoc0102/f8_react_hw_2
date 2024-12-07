@@ -8,6 +8,7 @@ import { TodoContext } from "../contexts/TodoContext";
 import { UserContext } from "../contexts/UserContext";
 
 const TodoForm = () => {
+  //init
   const { id } = useParams();
   const {
     register,
@@ -21,54 +22,46 @@ const TodoForm = () => {
   const todoState = useContext(TodoContext).state;
   const { state } = useContext(UserContext);
   const nav = useNavigate();
+  //execute
   useEffect(() => {
     id &&
       (async () => {
         try {
           const res = await todoService.getById(id);
-          if (res.status === 200) {
-            reset(res.data);
-          } else {
-            throw new Error("Error");
-          }
+          if (res.status !== 200) throw new Error("Error");
+          reset(res.data);
         } catch (error) {
           console.log(error);
         }
       })();
   }, []);
   async function handleForm(data) {
-    console.log("hello form");
-    if (id) {
-      console.log("hello id");
-
-      try {
+    try {
+      if (id) {
         const res = await todoService.updateById(id, data);
         if (res.status !== 200) throw new Error("Error");
-        const resAll = await todoService.getAll();
+        const resAll = await todoService.getByUserId(state.user.id);
         if (resAll.status !== 200) throw new Error("Error");
         dispatch({ type: "SET_TODOS", payload: resAll.data });
         nav("/");
-      } catch (error) {
-        console.log(error);
-      }
-    } else {
-      try {
+      } else {
         if (
           todoState.todos.filter((todo) => todo.title === data.title).length > 0
         ) {
           alert("Todo already exists");
           return;
         }
-        console.log("hello");
         const res = await todoService.create(data);
         if (res.status !== 201) throw new Error("Error");
         dispatch({ type: "ADD_TODO", payload: res.data });
-        nav("/");
-      } catch (error) {
-        console.log(error);
+        confirm("Go to homepage?") && nav("/");
+        reset();
       }
+    } catch (error) {
+      console.log(error);
     }
   }
+  //render
   return (
     <div className="container mx-auto">
       {/* Wrapper */}
@@ -153,13 +146,7 @@ const TodoForm = () => {
                 name="userId"
                 id="userId"
                 placeholder="UserId"
-                value={
-                  typeof state.user === "string"
-                    ? JSON.parse(state.user)?.id
-                    : state.user?.id
-                    ? state.user.id
-                    : ""
-                }
+                value={state.user.id}
                 {...register("userId", { valueAsNumber: true })}
                 hidden
               />

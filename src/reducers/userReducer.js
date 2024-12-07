@@ -4,9 +4,9 @@ export const userReducer = (state, action) => {
       return {
         user: action.payload
       };
-    case "DELETE_USER":
-      return {
-        user: {}
-      };
+    // case "DELETE_USER":
+    //   return {
+    //     user: {}
+    //   };
   }
 };

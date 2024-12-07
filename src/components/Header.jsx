@@ -4,23 +4,19 @@ import { UserContext } from "../contexts/UserContext";
 import { TodoContext } from "../contexts/TodoContext";
 
 const Header = () => {
+  //init
   const nav = useNavigate();
   const { state, dispatch } = useContext(UserContext);
   const todoDispatch = useContext(TodoContext).dispatch;
-  useEffect(() => {
-    const localUser = localStorage.getItem("user") || {};
-    dispatch({ type: "SET_USER", payload: localUser });
-  }, []);
+  //execute
   function handleLogout() {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("user");
-    dispatch({
-      type: "DELETE_USER",
-      payload: {}
-    });
+    dispatch({ type: "SET_USER", payload: {} });
     todoDispatch({ type: "SET_TODOS", payload: [] });
     nav("/");
   }
+  //render
   return (
     <header className="border-b">
       {/* Container */}
@@ -36,14 +32,12 @@ const Header = () => {
           </div>
           {/* Function */}
           <div className="flex gap-3 items-center">
-            {state?.user?.id ||
-            (typeof state?.user === "string" && JSON.parse(state?.user).id) ? (
+            {state.user.id ? (
+              // Have User
               <div className="flex gap-3 items-center">
                 <div>
                   Hello,
-                  {state.user.username ||
-                    (typeof state.user === "string" &&
-                      JSON.parse(state.user).username)}
+                  {state.user.username}
                 </div>
                 <div>
                   <button
@@ -55,6 +49,7 @@ const Header = () => {
                 </div>
               </div>
             ) : (
+              // No User
               <div className="flex gap-3 items-center">
                 <div>
                   <Link to="/register">Register</Link>

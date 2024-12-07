@@ -4,7 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { todoService } from "../services/todoService";
 
 const TodoPage = () => {
+  //init
   const { state, dispatch } = useContext(TodoContext);
+  //execute
   async function handleDelete(id) {
     if (!confirm("Are you sure you want to delete this todo?")) return;
     try {
@@ -15,6 +17,7 @@ const TodoPage = () => {
       console.log(error);
     }
   }
+  //render
   return (
     <div className="mt-10">
       <div className="container mx-auto">
@@ -45,7 +48,6 @@ const TodoPage = () => {
               </span>
             </div>
           </div>
-
           {/* todo app list */}
           <div className="mt-5 border rounded-md">
             <table className="w-full text-center">

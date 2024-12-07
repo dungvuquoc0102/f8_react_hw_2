@@ -9,46 +9,35 @@ import { todoService } from "../services/todoService";
 import { TodoContext } from "../contexts/TodoContext";
 
 const LoginLayout = () => {
-  const { state, dispatch } = useContext(UserContext);
+  //init
+  const { dispatch } = useContext(UserContext);
   const dispatchTodo = useContext(TodoContext).dispatch;
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors }
   } = useForm({
     resolver: zodResolver(loginSchema)
   });
   const nav = useNavigate();
-
+  //execute
   async function handleLogin(data) {
     try {
-      // Get User Info
+      // Set user
       const res = await authService.auth("/login", data);
       if (res.status !== 200) throw new Error("Error");
-      // Set User Info in Local Storage
-      localStorage.setItem("accessToken", res.data.accessToken);
       localStorage.setItem("user", JSON.stringify(res.data.user));
-      // Set User Info in Context
-      dispatch({
-        type: "SET_USER",
-        payload: res.data.user
-      });
-      // Get Todos by User
+      dispatch({ type: "SET_USER", payload: res.data.user });
+      // Set todos by user
       const todoRes = await todoService.getByUserId(res.data.user.id);
       if (todoRes.status !== 200) throw new Error("Error");
-      console.log(todoRes);
-      // Set Todos in Context
-      dispatchTodo({
-        type: "SET_TODOS",
-        payload: todoRes.data
-      });
+      dispatchTodo({ type: "SET_TODOS", payload: todoRes.data });
       nav("/");
     } catch (error) {
       console.log(error);
     }
   }
-
+  //render
   return (
     <div className="w-[500px] max-w-full mx-auto mt-10 border rounded-md p-3">
       {/* header */}

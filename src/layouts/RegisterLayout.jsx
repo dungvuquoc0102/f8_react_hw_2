@@ -1,12 +1,12 @@
-import React, { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import authService from "../services/authService";
-import { UserContext } from "../contexts/UserContext";
+import React from "react";
+import { useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
 import registerSchema from "../schemas/auth/registerSchema";
+import authService from "../services/authService";
 
 const RegisterLayout = () => {
+  //init
   const {
     register,
     handleSubmit,
@@ -15,27 +15,20 @@ const RegisterLayout = () => {
   } = useForm({
     resolver: zodResolver(registerSchema)
   });
-  const { state, dispatch } = useContext(UserContext);
   const nav = useNavigate();
-
+  //execute
   async function handleRegister(data) {
     try {
       delete data.confirmPassword;
       const res = await authService.auth("/register", data);
       if (res.status !== 201) throw new Error("Error");
-      // localStorage.setItem("accessToken", res.data.accessToken);
-      // localStorage.setItem("user", JSON.stringify(res.data.user));
-      // dispatch({
-      //   type: "SET_TODO",
-      //   payload: res.data.user
-      // });
       confirm("Go to login?") && nav("/login");
       reset();
     } catch (error) {
       console.log(error);
     }
   }
-
+  //render
   return (
     <div className="w-[500px] max-w-full mx-auto mt-10 border rounded-md p-3">
       {/* header */}
