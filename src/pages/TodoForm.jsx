@@ -150,6 +150,7 @@ const TodoForm = () => {
                     : ""
                 }
                 {...register("userId", { valueAsNumber: true })}
+                hidden
               />
             </div>
             {console.log(typeof state.user === "string")}
